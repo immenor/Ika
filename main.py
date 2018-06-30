@@ -54,7 +54,7 @@ def parse(sentences):
                     for link in chunk.prev_links:
                         adverbs = POSLocator.locate_adjective(link)
 
-                        print("Adverbs", adverbs)
+                        print("Adjectives", adverbs)
 
                     print("\n =========================================== \n")
 
