@@ -32,6 +32,18 @@ def locate_adverb(chunk):
 
     return adverbs
 
+
+def locate_adjective(chunk):
+    adjective = []
+    func = chunk[chunk.head_pos]
+
+    if func.feature_list[0] == "形容詞":
+        for i in range(len(chunk.tokens)):
+            if chunk[i].feature_list[0] == "形容詞":
+                adjective.append(chunk[i])
+
+    return adjective
+
 def locate_verb(chunk):
     verbs = []
     func = chunk[chunk.head_pos]
