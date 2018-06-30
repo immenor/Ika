@@ -27,6 +27,11 @@ class POSLocatorTests(unittest.TestCase):
         nouns = POSLocator.locate_adverb(tree.chunks[0])
         self.assertEqual(nouns[0].surface, "ゆっくり")
 
+    def test_can_find_suru_verb(self):
+        tree = self.analyzer.parse("ファイルを添付しました")
+        verbs = POSLocator.locate_verb(tree.chunks[1])
+        self.assertEqual(verbs[0].feature_list[6], "する")
+        self.assertEqual(verbs[1].surface, "添付")
 
 if __name__ == '__main__':
     unittest.main()

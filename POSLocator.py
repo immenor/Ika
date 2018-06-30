@@ -31,3 +31,16 @@ def locate_adverb(chunk):
                 adverbs.append(chunk[i])
 
     return adverbs
+
+def locate_verb(chunk):
+    verbs = []
+    func = chunk[chunk.head_pos]
+
+    if func.feature_list[0] == "動詞":
+        verbs.append(func)
+        if func.feature_list[4] == "サ変・スル":
+            for i in range(len(chunk.tokens)):
+                if chunk[i].feature_list[1] == "サ変接続":
+                    verbs.append(chunk[i])
+
+    return verbs

@@ -19,15 +19,9 @@ def parse(sentences):
             for token in chunk:
 
                 if token.feature_list[0] == "動詞":
-                    if token.feature_list[4] == "サ変・スル":
 
-                        # Found us a suru verb, so we really should go grab its next token
-                        for i in range(len(chunk.tokens)):
-                            if chunk[i].feature_list[1] == "サ変接続":
-                                print("Verb Root:", chunk[i])
+                    print("Verb ", POSLocator.locate_verb(chunk))
 
-                    print("Verb:", token.feature_list[6])
-                    relativeClauseNouns = POSLocator.locate_noun(tree[chunk.link])
                     for link in chunk.prev_links:
                         nouns = POSLocator.locate_noun(link)
                         particles = POSLocator.locate_particle(link)
@@ -37,7 +31,8 @@ def parse(sentences):
                         print("particles of this verb ", particles)
                         print("adverbs of this verb", adverbs)
 
-                    print("relative clause nouns", relativeClauseNouns)
+                    relative_clause_nouns = POSLocator.locate_noun(tree[chunk.link])
+                    print("relative clause nouns", relative_clause_nouns)
                     print("===========================================")
 
 
