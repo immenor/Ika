@@ -10,52 +10,30 @@ sentences = [
             ]
 
 
-class Collocation:
-    def __init__(self, root, func, head):
-        self.root = root
-        self.func = func
-        self.head = head
-
-    def __str__(self):
-        return self.__repr__()
-
-    def __repr__(self):
-        return f'Head: "{self.head.surface}", Func: "{self.func.surface}" Root Word: "{self.root.feature_list[6]}")'
-
-
-def find_particle_pair(token, chunk):
-
-    collocations = []
-    for link in chunk.prev_links:
-
-        collocation = Collocation(
-            token,
-            link[link.func_pos],
-            link[link.head_pos]
-        )
-        collocations.append(collocation)
-    return collocations
-
-
 def parse(sentences):
     for sentence in sentences:
         tree = analyzer.parse(sentence)
 
         for chunk in tree:
             for token in chunk:
-                # if token.feature_list[0] == "名詞":
-                #     print("found noun:", token)
 
-                # Verbs working well
                 if token.feature_list[0] == "動詞":
-                    collocations = find_particle_pair(token, chunk)
-                    print(collocations)
+                    if token.feature_list[4] == "サ変・スル":
 
-                # if token.feature_list[0] == "形容詞":
-                #     print("found adjective:", token)
+                        # Found us a suru verb, so we really should go grab its next token
+                        for i in range(len(chunk.tokens)):
+                            if chunk[i].feature_list[1] == "サ変接続":
+                                print("Verb Root:", chunk[i])
 
-                # if token.feature_list[0] == "副詞":
-                #     print("found adverb:", token)
+                    print("Verb:", token.feature_list[6])
+                    for link in chunk.prev_links:
+                        nouns = POSLocator.locate_noun(link)
+                        particles = POSLocator.locate_particle(link)
+
+                        print("nouns of this verb ", nouns)
+                        print("particles of this verb ", particles)
+
+                    print("")
 
 
 parse(sentences)
