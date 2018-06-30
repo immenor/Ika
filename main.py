@@ -1,5 +1,5 @@
 from cabocha.analyzer import CaboChaAnalyzer
-
+import POSLocator
 analyzer = CaboChaAnalyzer()
 
 sentences = [
