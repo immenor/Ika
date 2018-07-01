@@ -2,3 +2,4 @@
 .idea/
 venv/
 cabocha/
+__pycache__

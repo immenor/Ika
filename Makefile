@@ -2,7 +2,7 @@ run:
 	@python main.py
 
 test:
-	@python test_wiring.py
+	@python -m unittest discover ./ -p '*Spec.py'
 
 install:
 	git clone https://github.com/taku910/cabocha
