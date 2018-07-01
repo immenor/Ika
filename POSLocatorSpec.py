@@ -24,13 +24,13 @@ class POSLocatorTests(unittest.TestCase):
 
     def test_can_find_an_adv(self):
         tree = self.analyzer.parse("ゆっくり歩く")
-        nouns = POSLocator.locate_adverb(tree.chunks[0])
-        self.assertEqual(nouns[0].surface, "ゆっくり")
+        adverbs = POSLocator.locate_adverb(tree.chunks[0])
+        self.assertEqual(adverbs[0].surface, "ゆっくり")
 
     def test_can_find_an_adj(self):
         tree = self.analyzer.parse("美味しいケーキを食べる")
-        nouns = POSLocator.locate_adjective(tree.chunks[0])
-        self.assertEqual(nouns[0].surface, "美味しい")
+        adjectives = POSLocator.locate_adjective(tree.chunks[0])
+        self.assertEqual(adjectives[0].surface, "美味しい")
 
     def test_can_find_suru_verb(self):
         tree = self.analyzer.parse("ファイルを添付しました")
