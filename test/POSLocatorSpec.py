@@ -1,5 +1,5 @@
 import unittest
-import POSLocator
+from ika import POSLocator
 from cabocha.analyzer import CaboChaAnalyzer
 
 

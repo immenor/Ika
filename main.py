@@ -1,5 +1,6 @@
 from cabocha.analyzer import CaboChaAnalyzer
-import POSLocator
+from ika import POSLocator
+
 analyzer = CaboChaAnalyzer()
 
 sentences = [
