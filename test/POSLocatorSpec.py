@@ -38,5 +38,6 @@ class POSLocatorTests(unittest.TestCase):
         self.assertEqual(verbs[0].feature_list[6], "する")
         self.assertEqual(verbs[1].surface, "添付")
 
+
 if __name__ == '__main__':
     unittest.main()

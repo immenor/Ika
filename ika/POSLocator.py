@@ -21,6 +21,7 @@ def locate_noun(chunk):
 
     return nouns
 
+
 def locate_adverb(chunk):
     adverbs = []
     func = chunk[chunk.head_pos]
@@ -43,6 +44,7 @@ def locate_adjective(chunk):
                 adjective.append(chunk[i])
 
     return adjective
+
 
 def locate_verb(chunk):
     verbs = []

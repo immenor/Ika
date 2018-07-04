@@ -1,6 +1,6 @@
-from cabocha.analyzer import CaboChaAnalyzer
 from ika import POSLocator
 from collections import namedtuple
+
 NPVCollocation = namedtuple(
     "NPVCollocation",
     "np pp vp"
@@ -15,8 +15,6 @@ ADJNCollocation = namedtuple(
     "ADJNCollocation",
     "adjp np"
 )
-
-analyzer = CaboChaAnalyzer()
 
 
 def build_noun_particle_verb_collocations(chunk):
@@ -67,4 +65,3 @@ def build_adjective_noun_collocations(chunk):
                 )
 
     return collocations
-
