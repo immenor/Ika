@@ -1,5 +1,5 @@
 from cabocha.analyzer import CaboChaAnalyzer
-from ika import POSLocator
+from ika import CollocationGenerator
 
 analyzer = CaboChaAnalyzer()
 
@@ -14,50 +14,14 @@ sentences = [
 
 
 def parse(sentences):
-    print("\n Searching for Verbs Collocations... \n")
+    print("\n Searching for Collocations... \n")
 
     for sentence in sentences:
         tree = analyzer.parse(sentence)
-
         for chunk in tree:
-            for token in chunk:
-                if token.feature_list[0] == "動詞":
-
-                    print("Verb ", POSLocator.locate_verb(chunk))
-
-                    for link in chunk.prev_links:
-                        nouns = POSLocator.locate_noun(link)
-                        particles = POSLocator.locate_particle(link)
-                        adverbs = POSLocator.locate_adverb(link)
-
-                        print("nouns of this verb ", nouns)
-                        print("particles of this verb ", particles)
-                        print("adverbs of this verb", adverbs)
-
-                    relative_clause_nouns = POSLocator.locate_noun(tree[chunk.link])
-                    print("relative clause nouns", relative_clause_nouns)
-                    print("\n =========================================== \n")
-
-
-    print("\n Searching for Noun Collocations... \n")
-
-    for sentence in sentences:
-        tree = analyzer.parse(sentence)
-
-        for chunk in tree:
-            for token in chunk:
-                if token.feature_list[0] == "名詞":
-                    print("This Noun", token)
-                    print("Compound Nouns", POSLocator.locate_noun(chunk))
-                    print("Particles", POSLocator.locate_particle(chunk))
-                    print("Verbs", POSLocator.locate_verb(tree[chunk.link]))
-
-                    for link in chunk.prev_links:
-                        adverbs = POSLocator.locate_adjective(link)
-
-                        print("Adjectives", adverbs)
-
-                    print("\n =========================================== \n")
+            print("NPV Found: ", CollocationGenerator.build_noun_particle_verb_collocations(chunk))
+            print("AV Found: ", CollocationGenerator.build_adverb_verb_collocations(chunk))
+            print("ADJN Found: ", CollocationGenerator.build_adjective_noun_collocations(chunk))
 
 
 parse(sentences)
