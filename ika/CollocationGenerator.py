@@ -1,20 +1,20 @@
 from ika import POSLocator
 from collections import namedtuple
 
-NPVCollocation = namedtuple(
-    "NPVCollocation",
-    "np pp vp"
-)
 
-AVCollocation = namedtuple(
-    "AVCollocation",
-    "ap vp"
-)
+class NPVCollocation(namedtuple("NPVCollocation", ["np", "pp", "vp"])):
+    def __str__(self):
+        return str(f"{self.np} {self.pp} {self.vp}")
 
-ADJNCollocation = namedtuple(
-    "ADJNCollocation",
-    "adjp np"
-)
+
+class AVCollocation(namedtuple("AVCollocation", ["ap", "vp"])):
+    def __str__(self):
+        return str(f"{self.ap} {self.vp}")
+
+
+class ADJNCollocation(namedtuple("ADJNCollocation", ["adjp", "np"])):
+    def __str__(self):
+        return str(f"{self.adjp} {self.np}")
 
 
 def build_noun_particle_verb_collocations(chunk):
