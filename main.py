@@ -14,14 +14,24 @@ sentences = [
 
 
 def parse(sentences):
-    print("\n Searching for Collocations... \n")
-
     for sentence in sentences:
+        print("----------------")
+        print(sentence)
+        print("----------------")
+
         tree = analyzer.parse(sentence)
         for chunk in tree:
-            print("NPV Found: ", CollocationGenerator.build_noun_particle_verb_collocations(chunk))
-            print("AV Found: ", CollocationGenerator.build_adverb_verb_collocations(chunk))
-            print("ADJN Found: ", CollocationGenerator.build_adjective_noun_collocations(chunk))
+            npv_collocations = CollocationGenerator.build_noun_particle_verb_collocations(chunk)
+            if len(npv_collocations) > 0:
+                print(f"{len(npv_collocations)} NPVs: ", npv_collocations)
+
+            av_collocations = CollocationGenerator.build_adverb_verb_collocations(chunk)
+            if len(av_collocations) > 0:
+                print(f"{len(av_collocations)} AVs Found: ", av_collocations)
+
+            adjn_collocations = CollocationGenerator.build_adjective_noun_collocations(chunk)
+            if len(adjn_collocations) > 0:
+                print(f"{len(adjn_collocations)} ADJNs Found: ", adjn_collocations)
 
 
 parse(sentences)
